@@ -1,4 +1,8 @@
-
+# Using streamlit framework for front end development
+# Run this python file after giving the location of model in line 30
+# Copy the link provided in the output paste it in command prompt 
+# Add ' " ' in the starting and ending of location (e.g. -streamlit run "E:/malaria/frontend file for vgg19.py") and run the command
+# It will automatically show a interface where one can test the model.
 from PIL import Image,ImageOps
 import keras_preprocessing.image
 import matplotlib.pyplot as plt
@@ -8,8 +12,8 @@ import tensorflow as tf
 import tensorflow_hub as hub
 
 def main():
+#     We can add a picture to the interface by providing the location below
     image = Image.open('E:/abc.jpg')
-    """ Path of 'Pythonfileforcnnalgo.h5'"""
     st.image(image, caption='malaria', use_column_width=True)
     st.title("Malaria Parasite detector application")
     file_uploaded=st.file_uploader("Upload a blood smear image",type=['jpg','png','jpeg'])
@@ -23,7 +27,7 @@ def main():
         st.pyplot(figure)
 def predict_class(image):
     if (st.button('Predict')):
-        classifier_model=tf.keras.models.load_model(r'E:\malaria predictor\malaria_omdena10epoch.h5')
+        classifier_model=tf.keras.models.load_model(r'E:\Malaria\malaria_prediction_model.h5')
         shape=((224,224,3))
         model=tf.keras.Sequential(hub.KerasLayer(classifier_model,input_shape=shape))
         test_image=image.resize((224,224))
